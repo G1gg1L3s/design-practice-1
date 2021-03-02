@@ -7,11 +7,10 @@ import (
 	"os"
 	"os/exec"
 
+	// "github.com/G1gg1L3s/design-practice-1/build/gomodule"
 	"github.com/google/blueprint"
 	"github.com/roman-mazur/bood"
 	"github.com/roman-mazur/bood/gomodule"
-	// TODO: Підставте свій власний пакет.
-	// "github.com/roman-mazur/design-practice-1-template/build/gomodule"
 )
 
 var (
