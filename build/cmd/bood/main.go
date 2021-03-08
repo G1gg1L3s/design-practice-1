@@ -7,10 +7,9 @@ import (
 	"os"
 	"os/exec"
 
-	// "github.com/G1gg1L3s/design-practice-1/build/gomodule"
+	"github.com/G1gg1L3s/design-practice-1/build/gomodule"
 	"github.com/google/blueprint"
 	"github.com/roman-mazur/bood"
-	"github.com/roman-mazur/bood/gomodule"
 )
 
 var (
@@ -18,10 +17,10 @@ var (
 	verbose = flag.Bool("v", false, "Display debugging logs")
 )
 
+// NewContext creates new context with registered module
 func NewContext() *blueprint.Context {
 	ctx := bood.PrepareContext()
-	// TODO: Замініть імплементацію go_binary на власну.
-	ctx.RegisterModuleType("go_binary", gomodule.SimpleBinFactory)
+	ctx.RegisterModuleType("go_binary", gomodule.BinFactory)
 	return ctx
 }
 
