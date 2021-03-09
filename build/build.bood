@@ -1,10 +1,21 @@
 go_binary {
   // Module (and output) name.
   name: "bood",
-
   // Go package to build.
   pkg: "github.com/G1gg1L3s/design-practice-1/build/cmd/bood",
-
+  // Go package to test.
+  testPkg: "github.com/G1gg1L3s/design-practice-1/build/gomodule",
   // Build inputs.
-  srcs: ["**/*.go", "../go.mod"]
+  srcs: [
+    "**/*.go",
+    "../go.mod"
+  ],
+  // Exclude test sources
+  srcsExclude: [
+    "**/*_test.go"
+  ],
+  // Test sources.
+  testSrcs: [
+    "**/*_test.go"
+  ],
 }
