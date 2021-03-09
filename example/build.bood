@@ -1,0 +1,5 @@
+go_doc {
+ name: "example",
+ pkg: "github.com/G1gg1L3s/design-practice-1",
+ srcs: ["**/*.go"]
+}
