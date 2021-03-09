@@ -110,7 +110,7 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		},
 	})
 
-	// Append our main binary to test input, so you ninja will rerun the tests
+	// Append our main binary to teGlobWithDepsst input, so ninja will rerun the tests
 	// if we change one of the sources
 	testInputs = append(testInputs, outputPath)
 
@@ -141,8 +141,14 @@ func reportUnresolved(ctx blueprint.ModuleContext, unresolved []string) {
 	}
 }
 
+// Interface for testing resolvePatterns. It decouples resolvePatterns from the
+// Specific struct to just an interface which helps testing.
+type globWithDeps interface {
+	GlobWithDeps(src string, exclude []string) ([]string, error)
+}
+
 // resolvePatterns returns resolved files and poorly constructed patterns
-func resolvePatterns(ctx blueprint.ModuleContext, patterns []string, exclude []string) ([]string, []string) {
+func resolvePatterns(ctx globWithDeps, patterns []string, exclude []string) ([]string, []string) {
 	var result = []string{}
 	var unresolved = []string{}
 
