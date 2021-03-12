@@ -4,6 +4,11 @@ go:
   - 1.16
   - 1.15
 
+addons: 
+  apt: 
+    packages: 
+      - ninja-build
+
 before_script:
  - cd ./build
  - go build ./cmd/bood/main.go
