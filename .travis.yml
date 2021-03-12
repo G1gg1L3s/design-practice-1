@@ -7,7 +7,7 @@ go:
 addons: 
   apt: 
     packages: 
-      - ninja-build
+      - ninja-build-1.10.2
 
 before_script:
  - cd ./build
