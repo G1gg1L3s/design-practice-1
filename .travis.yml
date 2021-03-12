@@ -6,8 +6,9 @@ go:
 
 addons: 
   apt: 
+    update: true
     packages: 
-      - ninja-build-1.10.2
+      - ninja-build
 
 before_script:
  - cd ./build
