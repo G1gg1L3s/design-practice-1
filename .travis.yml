@@ -5,8 +5,8 @@ go:
   - 1.15
 
 before_script:
- - go build ./build/cmd/bood/main.go
  - cd ./build
+ - go build ./cmd/bood/main.go
 
 script: 
-  - ./cmd/bood/main
+  - ./main
