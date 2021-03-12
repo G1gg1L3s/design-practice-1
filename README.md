@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/G1gg1L3s/design-practice-1.svg?branch=master)](https://travis-ci.org/G1gg1L3s/design-practice-1)
 # Bood
 
 This is an educational build system developed on top of the google/blueprint.
