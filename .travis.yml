@@ -1,8 +1,14 @@
 language: go
- 
+dist: focal
 go:
   - 1.16
   - 1.15
+
+addons: 
+  apt: 
+    update: true
+    packages: 
+      - ninja-build
 
 before_script:
  - cd ./build
