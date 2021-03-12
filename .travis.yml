@@ -1,5 +1,5 @@
 language: go
-dist: ubuntu
+dist: bionic
 go:
   - 1.16
   - 1.15
