@@ -1,5 +1,27 @@
+go_binary {
+  // Module (and output) name.
+  name: "example_bin",
+  // Go package to build.
+  pkg: "github.com/G1gg1L3s/design-practice-1/example/example_bin",
+  // Go package to test.
+  testPkg: "github.com/G1gg1L3s/design-practice-1/example/example_bin",
+  // Build inputs.
+  srcs: [
+    "**/*.go"
+  ],
+  // Exclude test sources
+  srcsExclude: [
+    "**/*_test.go"
+  ],
+  // Test sources.
+  testSrcs: [
+    "**/*_test.go"
+  ],
+}
+
+
 go_doc {
- name: "gomodule",
- pkg: "github.com/G1gg1L3s/design-practice-1",
+ name: "example_docs",
+ pkg: "github.com/G1gg1L3s/design-practice-1/example/example_docs",
  srcs: ["**/*.go"]
 }
