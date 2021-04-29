@@ -17,6 +17,7 @@ go_binary {
   testSrcs: [
     "**/*_test.go"
   ],
+  bench: "."
 }
 
 
