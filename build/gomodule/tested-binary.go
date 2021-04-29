@@ -99,22 +99,23 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 		inputs = append(inputs, vendorDirPath)
 	}
 
-	// Generate rule for the main build
-	ctx.Build(pctx, blueprint.BuildParams{
-		Description: fmt.Sprintf("Build %s as Go binary", name),
-		Rule:        goBuild,
-		Outputs:     []string{outputPath},
-		Implicits:   inputs,
-		Args: map[string]string{
-			"outputPath": outputPath,
-			"workDir":    ctx.ModuleDir(),
-			"pkg":        tb.properties.Pkg,
-		},
-	})
-
-	// Append our main binary to teGlobWithDepsst input, so ninja will rerun the tests
-	// if we change one of the sources
-	testInputs = append(testInputs, outputPath)
+	// Generate rule for the main build if the pkg field is present
+	if tb.properties.Pkg != "" {
+		ctx.Build(pctx, blueprint.BuildParams{
+			Description: fmt.Sprintf("Build %s as Go binary", name),
+			Rule:        goBuild,
+			Outputs:     []string{outputPath},
+			Implicits:   inputs,
+			Args: map[string]string{
+				"outputPath": outputPath,
+				"workDir":    ctx.ModuleDir(),
+				"pkg":        tb.properties.Pkg,
+			},
+		})
+		// Append our main binary to teGlobWithDepsst input, so ninja will rerun the tests
+		// if we change one of the sources
+		testInputs = append(testInputs, outputPath)
+	}
 
 	// test artifact
 	outTestPath := fmt.Sprintf(".%s.test.out", name)
