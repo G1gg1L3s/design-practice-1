@@ -25,9 +25,9 @@ var (
 	}, "workDir", "name")
 
 	goTest = pctx.StaticRule("gotest", blueprint.RuleParams{
-		Command:     "cd $workDir && go test -v $pkg > $outputPath",
+		Command:     "cd $workDir && go test -v $pkg $bench > $outputPath",
 		Description: "Build and test $pkg",
-	}, "workDir", "pkg", "outputPath")
+	}, "workDir", "pkg", "outputPath", "bench")
 )
 
 // goBinaryModuleType implements the simplest Go binary build without running tests for the target Go package.
@@ -47,6 +47,8 @@ type testedBinaryModule struct {
 		SrcsExclude []string
 		// Test Exclude patterns.
 		TestSrcsExclude []string
+		// Patter for benchmarks
+		Bench string
 		// If to call vendor command.
 		VendorFirst bool
 		// Example of how to specify dependencies.
@@ -118,6 +120,10 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 	outTestPath := fmt.Sprintf(".%s.test.out", name)
 	outTestPath = path.Join(config.BaseOutputDir, outTestPath)
 
+	bench := ""
+	if tb.properties.Bench != "" {
+		bench = fmt.Sprintf("-bench=%s", tb.properties.Bench)
+	}
 	// Generate our rule for the tests
 	// It will produce test artifact which won't run the tests again if nothing changes
 	ctx.Build(pctx, blueprint.BuildParams{
@@ -129,6 +135,7 @@ func (tb *testedBinaryModule) GenerateBuildActions(ctx blueprint.ModuleContext) 
 			"outputPath": outTestPath,
 			"workDir":    ctx.ModuleDir(),
 			"pkg":        tb.properties.TestPkg,
+			"bench":      bench,
 		},
 	})
 
