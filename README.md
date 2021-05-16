@@ -38,5 +38,3 @@ INFO 2021/03/10 11:19:44 Starting the build now
 [3/3] Testing bood
 ```
 At this point, your bood executable will be at `out/bin/bood` and documentation will be at `out/docs`.
-
-
